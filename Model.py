@@ -11,7 +11,7 @@ PORT = '3306'
 DB = 'sistema_de_login'
 CONNECT = f'mysql+pymysql://{USUARIO}:{SENHA}@{HOST}:{PORT}/{DB}'
 
-engine = create_engine(CONNECT, echo=True)
+engine = create_engine(CONNECT, echo=False)
 Session = sessionmaker(bind=engine)
 session = Session
 Base = declarative_base()
@@ -22,7 +22,7 @@ class Cadastro(Base):
   id = Column(Integer, primary_key=True)
   nome = Column(String(50))
   email = Column(String(20))
-  senha = Column(String(8))
+  senha = Column(String(100))
 
 
 class Login:
