@@ -1,35 +1,15 @@
 from sqlalchemy import exists
 from Model import Session, Cadastro
 from hashlib import sha256
-from os import system
 import re
-
 
 session = Session()
 
+
 class CadastroController:
 
-  def validarEmail(email):
-    x = session.query(Cadastro).all()
-
-    for i in x:
-      if i.email == email:
-        return True
-    return False
-  
-
-  def validarSenha(senha):
-    if len(senha) >= 8:
-      if re.search('[A-Z]', senha) or re.search('[a-z]', senha):
-        if re.search('[0-9]', senha):
-          if re.search('[!@#$%^&*]', senha):
-            senha = sha256(senha.encode()).hexdigest()
-            return senha
-    return False
-
   def adicionarUsuario(self, nome, email, senha):
-
-    emailExiste = CadastroController.validarEmail(email)
+    emailExiste = CadastroController.verificarEmail(email)
     senhaValida = CadastroController.validarSenha(senha)
 
     if not emailExiste and senhaValida:
@@ -45,17 +25,32 @@ class CadastroController:
             'Esse email já existe em nosso banco de dados.')
     elif not senhaValida:
       print('>> Esta senha não é válida!\n'
-            'A senha tem que ter 8 ou mais digitos\n'
-            'Possuir letra maiúscula, minúscula, números e caracteres especiais.')
+            'A senha tem que ter 8 ou mais digitos,\n'
+            'possuir letra maiúscula, minúscula,\n'
+            'números e caracteres especiais.')
     return False
+  
+  def verificarEmail(email):
+    usuarios = session.query(Cadastro).all()
+
+    for usuario in usuarios:
+      if usuario.email == email:
+        return True
+    return False
+  
+  def validarSenha(senha):
+    if len(senha) >= 8:
+      if re.search('[A-Z]', senha) or re.search('[a-z]', senha):
+        if re.search('[0-9]', senha):
+          if re.search('[!@#$%^&*]', senha):
+            senha = sha256(senha.encode()).hexdigest()
+            return senha
+    return False
+  
     
-    
-
-
-
 class LoginController:
 
-  def validaLogin(email, senha):
+  def validaLogin(self, email, senha):
     senha = sha256(senha.encode()).hexdigest()  
 
 
@@ -63,34 +58,8 @@ class LoginController:
 
 
 
-ctrlCadastro = CadastroController()
-
-while True:
-  system('cls')
-  nome = input('Digite seu nome: ')
-  email = input('Digite seu email: ')
-  senha = input('Digite uma senha: ')
-  confirmarSenha = input('Confirme a senha: ')
-  print('-' * 30)
-
-  if senha == confirmarSenha:
-    cadastroFeito = ctrlCadastro.adicionarUsuario(nome, email, senha)
-    if cadastroFeito:
-      break
-  else:
-    print(">> As senhas não conferem!")
-  input('\nPressione "Enter" para continuar...')
 
 
-
-
-
-  # if CadastroController.validarSenha(senha):
-  #   print('Senha válida')
-    
-  #   break
-  # else:
-  #   print('Senha inválida')
 
 
 
