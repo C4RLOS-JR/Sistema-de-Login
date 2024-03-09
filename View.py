@@ -9,11 +9,9 @@ while True:
   system('cls')
   cprint(' SISTEMA DE LOGIN PYTHONFULL! ', color='light_blue')
   print('-' * 30)
-
   print('1- LOGIN\n'
         '2- CADASTRO\n'
         '3- SAIR')
-  
   print('-' * 30)
   opcao = input('OPÇÃO: ')
 
