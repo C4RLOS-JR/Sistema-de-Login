@@ -1,5 +1,5 @@
 from unittest.mock import Base
-from sqlalchemy import ForeignKey, create_engine, Column, Integer, String
+from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
@@ -23,9 +23,5 @@ class Cadastro(Base):
   nome = Column(String(50))
   email = Column(String(20))
   senha = Column(String(100))
-
-
-class Login:
-  pass
 
 Base.metadata.create_all(engine)
