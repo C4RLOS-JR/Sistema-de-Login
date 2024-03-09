@@ -1,7 +1,7 @@
-from sqlalchemy import exists
 from Model import Session, Cadastro
 from hashlib import sha256
 from termcolor import cprint
+from os import system
 import re
 
 session = Session()
@@ -41,6 +41,7 @@ class CadastroController:
                       senha=senhaValida)
       session.add(usuario)
       session.commit()
+      system('cls')
       cprint('>> CADASTRO REALIZADO COM SUCESSO!', color='light_green')
       print('Faça o login para entrar!')
       return True
@@ -64,6 +65,7 @@ class LoginController:
 
     if emailExiste:
       if senhaExiste:
+        system('cls')
         cprint('LOGIN EFETUADO COM SUCESSO!', color='light_green')
         print('Seja bem vindo!')
         return True
