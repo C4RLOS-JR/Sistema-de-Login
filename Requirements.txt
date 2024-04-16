@@ -1,0 +1,9 @@
+Para rodar o código:
+
+→ Bibliotécas instaladas: pymysql sqlalchemy termcolor
+→ Banco de dados: Criar um banco de dados com o nome de "sistema_de_login".
+
+Observações: 
+
+Reparei que quando rodo o código no vscode e faço um cadastro, é preciso fechar o terminal e rodar o código denovo para fazer o login.
+Se eu fizer o cadastro e no mesmo terminal realizar o login, ele diz que o email não existe.
