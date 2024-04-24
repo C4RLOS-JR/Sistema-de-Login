@@ -6,7 +6,7 @@ ctrl_cadastro = CadastroController()
 ctrl_login = LoginController()
 
 while True:
-  system('cls')
+  system('clear')
   cprint(' SISTEMA DE LOGIN PYTHONFULL! ', color='light_blue')
   print('-' * 30)
   print('1- LOGIN\n'
@@ -16,7 +16,7 @@ while True:
   opcao = input('OPÇÃO: ')
 
   if opcao == '1':
-    system('cls')
+    system('clear')
     cprint(f'{"LOGIN":^30}', color='light_blue')      
     print('-' * 30)
     email = input('DIGITE UM EMAIL: ')
@@ -27,7 +27,7 @@ while True:
     input('\nPressione "Enter" para continuar...')
 
   if opcao == '2':
-    system('cls')
+    system('clear')
     cprint(f'{"CADASTRO":^30}', color='light_blue')
     print('-' * 30)
     nome = input('DIGITE SEU NOME: ')
@@ -37,12 +37,12 @@ while True:
     print('-' * 30)
 
     if senha == confirmar_senha:
-      cadastroFeito = ctrl_cadastro.adicionarUsuario(nome, email, senha)
+      ctrl_cadastro.adicionarUsuario(nome, email, senha)
     else:
       cprint(">> AS SENHAS NÃO CONFEREM!", color='light_red')
     input('\nPressione "Enter" para continuar...')
   
   if opcao == '3':
-    system('cls')
-    print('PROGRAMA FINALIZADO!')
+    system('clear')
+    print('PROGRAMA FINALIZADO!\n')
     break

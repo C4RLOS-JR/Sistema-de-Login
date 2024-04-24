@@ -21,9 +21,7 @@ def verificarSenha(senha):
   
 def validarSenha(senha):
   if len(senha) >= 8:
-    if re.search('[A-Z]', senha) or re.search('[a-z]', senha):
-      if re.search('[0-9]', senha):
-        if re.search('[!@#$%^&*]', senha):
+    if re.search('[A-Z]', senha) and re.search('[a-z]', senha) and re.search('[0-9]', senha) and re.search('[!@#$%^&*]', senha):
           senha = sha256(senha.encode()).hexdigest()
           return senha
   return False
@@ -32,23 +30,23 @@ def validarSenha(senha):
 class CadastroController:
 
   def adicionarUsuario(self, nome, email, senha):
-    emailExiste = verificarEmail(email)
-    senhaValida = validarSenha(senha)
+    email_existe = verificarEmail(email)
+    senha_valida = validarSenha(senha)
 
-    if not emailExiste and senhaValida:
-      usuario = Cadastro(nome=nome,
-                      email=email, 
-                      senha=senhaValida)
+    if not email_existe and senha_valida:
+      usuario = Cadastro( nome=nome,
+                          email=email, 
+                          senha=senha_valida)
       session.add(usuario)
       session.commit()
-      system('cls')
+      system('clear')
       cprint('>> CADASTRO REALIZADO COM SUCESSO!', color='light_green')
       print('Faça o login para entrar!')
       return True
-    elif emailExiste:
+    elif email_existe:
       cprint('>> EMAIL JÁ CADASTRADO!', color='light_red')
       print('Esse email já existe em nosso banco de dados.')
-    elif not senhaValida:
+    elif not senha_valida:
       cprint('>> SENHA INVÁLIDA!', color='light_red')
       print('A senha tem que ter 8 ou mais digitos,\n'
             'possuir letra maiúscula, minúscula,\n'
@@ -60,12 +58,12 @@ class LoginController:
 
   def validaLogin(self, email, senha):
     senha = sha256(senha.encode()).hexdigest()
-    emailExiste = verificarEmail(email)
-    senhaExiste = verificarSenha(senha)
+    email_existe = verificarEmail(email)
+    senha_existe = verificarSenha(senha)
 
-    if emailExiste:
-      if senhaExiste:
-        system('cls')
+    if email_existe:
+      if senha_existe:
+        system('clear')
         cprint('LOGIN EFETUADO COM SUCESSO!', color='light_green')
         print('Seja bem vindo!')
         return True
