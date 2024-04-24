@@ -2,8 +2,8 @@ from Controller import *
 from termcolor import cprint
 from os import system
 
-ctrlCadastro = CadastroController()
-ctrlLogin = LoginController()
+ctrl_cadastro = CadastroController()
+ctrl_login = LoginController()
 
 while True:
   system('cls')
@@ -23,7 +23,7 @@ while True:
     senha = input('DIGITE UMA SENHA: ')
     print('-' * 30)
 
-    loginEfetuado = ctrlLogin.validaLogin(email, senha)
+    login_efetuado = ctrl_login.validaLogin(email, senha)
     input('\nPressione "Enter" para continuar...')
 
   if opcao == '2':
@@ -33,11 +33,11 @@ while True:
     nome = input('DIGITE SEU NOME: ')
     email = input('DIGITE SEU EMAIL: ')
     senha = input('DIGITE UMA SENHA: ')
-    confirmarSenha = input('CONFIRME A SENHA: ')
+    confirmar_senha = input('CONFIRME A SENHA: ')
     print('-' * 30)
 
-    if senha == confirmarSenha:
-      cadastroFeito = ctrlCadastro.adicionarUsuario(nome, email, senha)
+    if senha == confirmar_senha:
+      cadastroFeito = ctrl_cadastro.adicionarUsuario(nome, email, senha)
     else:
       cprint(">> AS SENHAS NÃO CONFEREM!", color='light_red')
     input('\nPressione "Enter" para continuar...')
